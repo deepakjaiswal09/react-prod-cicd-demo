@@ -1,4 +1,4 @@
-name: Build and Push Docker Image
+name: Build Push and Deploy Docker Image
 
 on:
   push:
@@ -34,3 +34,6 @@ jobs:
           tags: |
             deepakjaiswal09/react-prod-app:latest
             deepakjaiswal09/react-prod-app:${{ steps.vars.outputs.TAG }}
+
+      - name: Trigger Render Deployment
+        run: curl ${{ secrets.RENDER_DEPLOY_HOOK }}
